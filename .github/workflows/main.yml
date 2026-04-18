@@ -7,15 +7,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
-      - run: unzip BisikChat-v2.zip
-      - run: chmod +x BisikChat/gradlew
-      - run: cd BisikChat && ./gradlew assembleDebug --no-daemon
-      - uses: actions/upload-artifact@v3
+      - uses: android-actions/setup-android@v3
+      - run: sdkmanager "build-tools;33.0.2" "platforms;android-33"
+      - run: ls -la
+      - name: Extract ZIP
+        run: |
+          ZIP=$(ls *.zip | head -1)
+          echo "ZIP=$ZIP"
+          unzip -o "$ZIP" -d project
+          ls project/
+      - name: Find project
+        run: |
+          GRADLEW=$(find project -name "gradlew" | head -1)
+          echo "PROJ_DIR=$(dirname $GRADLEW)" >> $GITHUB_ENV
+      - run: chmod +x ${{ env.PROJ_DIR }}/gradlew
+      - run: cd ${{ env.PROJ_DIR }} && ./gradlew assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
         with:
           name: BisikChat-APK
-          path: BisikChat/app/build/outputs/apk/debug/*.apk
+          path: "**/*.apk"
+          if-no-files-found: error
