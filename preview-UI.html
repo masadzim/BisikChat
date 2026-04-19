@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>BisikChat v2.0 Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080B12;--s1:#0E1220;--s2:#141829;--s3:#1C2235;--s4:#232A40;--border:#1E2640;--blue:#3B7BFF;--blue2:#5B96FF;--teal:#0ECFB0;--red:#FF4D6A;--amber:#FFB347;--green:#22D97A;--text:#E4EAF8;--dim:#6B7799;--muted:#333D5A;--font:'DM Sans',sans-serif;--head:'Syne',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#050709;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:var(--font);padding:20px;gap:20px;flex-wrap:wrap}
+.phone{width:360px;height:720px;background:var(--bg);border-radius:44px;border:1.5px solid #1A2035;box-shadow:0 0 0 8px #0A0C12,0 0 0 10px #141828,0 60px 120px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.04);display:flex;flex-direction:column;overflow:hidden;position:relative;flex-shrink:0}
+.phone::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#050709;border-radius:0 0 18px 18px;z-index:100}
+.sbar{height:44px;display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px 6px;flex-shrink:0;position:relative;z-index:99}
+.sbar-t{font-family:var(--head);font-size:13px;font-weight:600;color:var(--text)}
+.sbar-i{display:flex;align-items:center;gap:5px}
+.sbar-i svg{width:13px;height:13px;fill:var(--dim)}
+.screen{display:none;flex-direction:column;flex:1;overflow:hidden;animation:sIn .25s cubic-bezier(.4,0,.2,1)}
+.screen.active{display:flex}
+@keyframes sIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+@keyframes sBack{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:translateX(0)}}
+.screen.back{animation:sBack .25s cubic-bezier(.4,0,.2,1)}
+.scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+.scroll::-webkit-scrollbar{display:none}
+
+/* ── SPLASH ── */
+#splash{background:var(--bg);align-items:center;justify-content:center;gap:0}
+.splash-icon{font-size:64px;animation:splashPulse 1.8s ease-in-out infinite}
+@keyframes splashPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.splash-title{font-family:var(--head);font-size:34px;font-weight:800;color:var(--text);margin-top:16px;letter-spacing:-1px}
+.splash-sub{font-size:13px;color:var(--dim);margin-top:6px}
+.splash-bar{width:120px;height:3px;background:var(--s3);border-radius:2px;margin-top:48px;overflow:hidden}
+.splash-bar::after{content:'';display:block;height:100%;width:40%;background:var(--blue);border-radius:2px;animation:loadBar 1.8s ease-in-out infinite}
+@keyframes loadBar{0%{margin-left:-40%}100%{margin-left:120%}}
+.splash-badge{display:flex;align-items:center;gap:6px;margin-top:20px;background:rgba(59,123,255,.1);border:1px solid rgba(59,123,255,.2);border-radius:20px;padding:6px 14px}
+.splash-badge span{font-size:12px;color:var(--blue2)}
+
+/* ── REGISTER ── */
+#register .rscroll{flex:1;overflow-y:auto;scrollbar-width:none;padding:16px 22px 24px}
+#register .rscroll::-webkit-scrollbar{display:none}
+.av-preview-wrap{display:flex;justify-content:center;margin:8px 0 20px}
+.av-preview{width:76px;height:76px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:30px;font-weight:800;color:white;background:var(--blue);transition:background .3s}
+.reg-title{font-family:var(--head);font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
+.reg-sub{font-size:12px;color:var(--dim);margin-bottom:22px;line-height:1.5}
+.field-label{font-size:10px;color:var(--dim);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;display:block}
+.field{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:12px;padding:12px 14px;font-family:var(--font);font-size:14px;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:14px}
+.field:focus{border-color:rgba(59,123,255,.5)}
+.field::placeholder{color:var(--muted)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-primary{width:100%;height:50px;background:var(--blue);border:none;border-radius:14px;color:white;font-family:var(--head);font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 8px 24px rgba(59,123,255,.3);margin-bottom:14px}
+.btn-primary:hover{background:#5B96FF;transform:translateY(-1px)}
+.privacy-note{text-align:center;font-size:11px;color:var(--muted);line-height:1.5}
+
+/* ── LOGIN ── */
+#login{align-items:center;justify-content:center;padding:28px;gap:0}
+.login-av{width:84px;height:84px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:32px;font-weight:800;color:white;background:var(--blue);margin-bottom:14px;box-shadow:0 0 30px rgba(59,123,255,.35)}
+.login-name{font-family:var(--head);font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px}
+.login-hint{font-size:13px;color:var(--dim);margin-bottom:28px}
+.pin-dots{display:flex;gap:12px;margin-bottom:30px}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--muted);transition:all .2s}
+.pin-dot.filled{background:var(--blue);border-color:var(--blue);transform:scale(1.1)}
+.numpad{display:grid;grid-template-columns:repeat(3,72px);gap:10px;margin-bottom:20px}
+.num-btn{height:62px;background:var(--s2);border:1px solid var(--border);border-radius:16px;font-family:var(--head);font-size:22px;font-weight:700;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;user-select:none}
+.num-btn:hover{background:var(--s3);transform:scale(1.03)}
+.num-btn:active{transform:scale(.96);background:var(--s4)}
+.num-btn.del{background:var(--s3);font-size:18px}
+.num-btn.ok{background:var(--blue);color:white;box-shadow:0 4px 16px rgba(59,123,255,.4)}
+.num-btn.ok:hover{background:var(--blue2)}
+.login-note{font-size:11px;color:var(--muted)}
+
+/* ── MAIN ── */
+#main .main-hdr{background:var(--s1);border-bottom:1px solid var(--border);padding:12px 16px;flex-shrink:0}
+.identity-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.self-av{width:42px;height:42px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-size:17px;font-weight:800;color:white;cursor:pointer;transition:transform .15s;flex-shrink:0}
+.self-av:hover{transform:scale(1.05)}
+.self-info{flex:1}
+.self-name{font-family:var(--head);font-size:15px;font-weight:700;color:var(--text)}
+.self-status{font-size:11px;color:var(--blue2);margin-top:1px}
+.app-badge{font-size:12px;color:var(--dim)}
+.bt-status-row{display:flex;align-items:center;gap:6px}
+.bt-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.bt-dot.on{background:var(--green);animation:dotPulse 2s infinite}
+.bt-dot.off{background:var(--red)}
+@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.4}}
+.bt-label{font-size:12px;color:var(--dim)}
+.action-row{display:flex;gap:8px;padding:10px 14px;background:var(--s2);border-bottom:1px solid var(--border);flex-shrink:0}
+.act-btn{flex:1;height:38px;border:none;border-radius:10px;font-family:var(--font);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s}
+.act-btn.discover{background:var(--s3);color:var(--dim);border:1px solid var(--border)}
+.act-btn.connect{background:var(--blue);color:white}
+.msgs{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:5px;scrollbar-width:none}
+.msgs::-webkit-scrollbar{display:none}
+.sys-pill{align-self:center;background:var(--s3);border:1px solid var(--border);border-radius:20px;padding:3px 12px;font-size:11px;color:var(--dim);margin:3px 0}
+.msg-row{display:flex;animation:mIn .2s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.msg-row.me{justify-content:flex-end}
+.bubble{max-width:220px;padding:9px 12px;font-size:14px;line-height:1.45}
+.me .bubble{background:var(--blue);color:white;border-radius:18px 18px 4px 18px}
+.them .bubble{background:var(--s3);border:1px solid var(--border);color:var(--text);border-radius:18px 18px 18px 4px}
+.bubble-sender{font-size:10px;font-weight:700;color:var(--blue2);margin-bottom:2px;display:block}
+.bubble-time{font-size:10px;display:block;margin-top:3px;text-align:right}
+.me .bubble-time{color:rgba(255,255,255,.5)}
+.them .bubble-time{color:var(--dim)}
+.typing{display:flex;gap:4px;padding:10px 14px;background:var(--s3);border:1px solid var(--border);border-radius:18px 18px 18px 4px;width:fit-content}
+.typing span{width:6px;height:6px;background:var(--dim);border-radius:50%;animation:typ 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes typ{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px);background:var(--blue2)}}
+.input-bar{display:flex;align-items:center;gap:8px;padding:10px 12px 16px;background:var(--s1);border-top:1px solid var(--border);flex-shrink:0}
+.input-wrap{flex:1;background:var(--s2);border:1px solid var(--border);border-radius:20px;padding:9px 14px;display:flex;align-items:center;gap:6px;transition:border-color .2s}
+.input-wrap:focus-within{border-color:rgba(59,123,255,.4)}
+.input-wrap input{flex:1;background:none;border:none;outline:none;font-family:var(--font);font-size:14px;color:var(--text)}
+.input-wrap input::placeholder{color:var(--muted)}
+.send-fab{width:40px;height:40px;background:var(--blue);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(59,123,255,.4);transition:all .15s;flex-shrink:0}
+.send-fab:hover{transform:scale(1.06);background:var(--blue2)}
+.send-fab svg{width:15px;height:15px;stroke:white;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* profile popup */
+.profile-popup{position:absolute;top:60px;right:14px;background:var(--s2);border:1px solid var(--border);border-radius:16px;padding:4px;z-index:200;display:none;min-width:160px;box-shadow:0 12px 32px rgba(0,0,0,.5);animation:popIn .2s ease}
+@keyframes popIn{from{opacity:0;transform:scale(.9) translateY(-8px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.profile-popup.show{display:block}
+.popup-item{padding:10px 14px;border-radius:10px;font-size:13px;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s}
+.popup-item:hover{background:var(--s3)}
+.popup-item.danger{color:var(--red)}
+
+/* screen label */
+.screen-label{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(59,123,255,.12);border:1px solid rgba(59,123,255,.25);border-radius:20px;padding:5px 14px;font-size:11px;color:var(--blue2);white-space:nowrap;pointer-events:none;font-family:var(--head);font-weight:600;letter-spacing:.05em}
+
+/* nav arrows outside phone */
+.nav-hint{color:#333D5A;font-size:12px;font-family:var(--head);text-align:center;margin-top:12px}
+.nav-dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--muted);transition:background .2s;cursor:pointer}
+.nav-dot.active{background:var(--blue)}
+
+.phone-wrap{display:flex;flex-direction:column;align-items:center}
+</style>
+</head>
+<body>
+
+<div class="phone-wrap">
+<div class="phone" id="phone">
+
+  <!-- Status bar -->
+  <div class="sbar">
+    <span class="sbar-t">09:41</span>
+    <div class="sbar-i">
+      <svg viewBox="0 0 24 24"><path d="M6.5 6.5l11 11L12 23V1l5.5 5.5-11 11"/></svg>
+      <svg viewBox="0 0 24 24"><rect x="2" y="7" width="18" height="10" rx="2"/><rect x="4" y="9" width="12" height="6" rx="1" style="fill:#6B7799"/></svg>
+    </div>
+  </div>
+
+  <!-- ══ SPLASH ═══════════════════════════════════════ -->
+  <div class="screen active" id="splash">
+    <div class="splash-icon">🔵</div>
+    <div class="splash-title">BisikChat</div>
+    <div class="splash-sub">Chat Bluetooth · Tanpa Internet</div>
+    <div class="splash-bar"></div>
+    <div class="splash-badge">
+      <span>🔒 100% Lokal · Tanpa Cloud · Tanpa Akun</span>
+    </div>
+    <div class="screen-label">1 · Splash Screen</div>
+  </div>
+
+  <!-- ══ REGISTER ══════════════════════════════════════ -->
+  <div class="screen" id="register">
+    <div class="rscroll">
+      <div class="av-preview-wrap">
+        <div class="av-preview" id="avPreview">?</div>
+      </div>
+      <div class="reg-title">Buat Profil Lokal</div>
+      <div class="reg-sub">Tersimpan di perangkat ini saja.<br>Tidak ada cloud, tidak ada tracking.</div>
+
+      <label class="field-label">Nama Tampilan</label>
+      <input class="field" id="regName" placeholder="Nama kamu..." oninput="updatePreview()">
+
+      <label class="field-label">PIN (4–6 digit)</label>
+      <div class="field-row">
+        <input class="field" type="password" placeholder="Buat PIN..." style="margin-bottom:0" maxlength="6">
+        <input class="field" type="password" placeholder="Ulangi PIN..." style="margin-bottom:0" maxlength="6">
+      </div>
+      <div style="height:14px"></div>
+
+      <label class="field-label">Status (opsional)</label>
+      <input class="field" placeholder="Tersedia / Sibuk / DND...">
+
+      <label class="field-label">Nama Device (terlihat orang lain)</label>
+      <input class="field" placeholder="Contoh: HP Abang">
+
+      <button class="btn-primary" onclick="goLogin()">Buat Profil &amp; Masuk →</button>
+      <div class="privacy-note">🔒 Data lokal · Tidak ada server · Tidak ada iklan</div>
+    </div>
+    <div class="screen-label">2 · Register — Buat Profil Lokal</div>
+  </div>
+
+  <!-- ══ LOGIN ═════════════════════════════════════════ -->
+  <div class="screen" id="login">
+    <div class="login-av" id="loginAv">H</div>
+    <div class="login-name" id="loginName">Halo, Han! 👋</div>
+    <div class="login-hint">Masukkan PIN untuk masuk</div>
+
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+
+    <div class="numpad">
+      <div class="num-btn" onclick="pinPress('1')">1</div>
+      <div class="num-btn" onclick="pinPress('2')">2</div>
+      <div class="num-btn" onclick="pinPress('3')">3</div>
+      <div class="num-btn" onclick="pinPress('4')">4</div>
+      <div class="num-btn" onclick="pinPress('5')">5</div>
+      <div class="num-btn" onclick="pinPress('6')">6</div>
+      <div class="num-btn" onclick="pinPress('7')">7</div>
+      <div class="num-btn" onclick="pinPress('8')">8</div>
+      <div class="num-btn" onclick="pinPress('9')">9</div>
+      <div class="num-btn del" onclick="pinDel()">⌫</div>
+      <div class="num-btn" onclick="pinPress('0')">0</div>
+      <div class="num-btn ok" onclick="pinOk()">✓</div>
+    </div>
+    <div class="login-note">🔒 Verifikasi lokal · Tidak terhubung internet</div>
+    <div class="screen-label">3 · Login — PIN Lokal</div>
+  </div>
+
+  <!-- ══ MAIN CHAT ══════════════════════════════════════ -->
+  <div class="screen" id="main">
+    <!-- Profile popup -->
+    <div class="profile-popup" id="profilePopup">
+      <div class="popup-item" onclick="hidePopup()">👤 Lihat Profil</div>
+      <div class="popup-item" onclick="hidePopup()">✏️ Edit Status</div>
+      <div class="popup-item danger" onclick="doLogout()">🚪 Logout</div>
+    </div>
+
+    <!-- Header -->
+    <div class="main-hdr">
+      <div class="identity-row">
+        <div class="self-av" id="mainAv" onclick="togglePopup()" style="background:var(--blue)">H</div>
+        <div class="self-info">
+          <div class="self-name" id="mainName">Han</div>
+          <div class="self-status" id="mainStatus">● Tersedia</div>
+        </div>
+        <div class="app-badge">🔵 BisikChat</div>
+      </div>
+      <div class="bt-status-row">
+        <div class="bt-dot on" id="btDot"></div>
+        <div class="bt-label" id="btLabel">🟢 Terhubung: HP Istri</div>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="action-row">
+      <button class="act-btn discover">📡 Dapat Ditemukan</button>
+      <button class="act-btn connect" onclick="toggleConnect()">✕ Putuskan</button>
+    </div>
+
+    <!-- Messages -->
+    <div class="msgs" id="msgs">
+      <div class="sys-pill">Hari ini · Bluetooth Aktif 🔵</div>
+
+      <div class="msg-row them">
+        <div class="bubble">
+          <span class="bubble-sender">Istri</span>
+          Abang dimana? Udah lama nih 😅
+          <span class="bubble-time">09:32</span>
+        </div>
+      </div>
+      <div class="msg-row me">
+        <div class="bubble">
+          Sebentar sayang, antri dulu 🙏
+          <span class="bubble-time">09:33 ✓✓</span>
+        </div>
+      </div>
+      <div class="msg-row them">
+        <div class="bubble">
+          <span class="bubble-sender">Istri</span>
+          Ok aku tunggu di pintu masuk 😊
+          <span class="bubble-time">09:33</span>
+        </div>
+      </div>
+      <div class="msg-row me">
+        <div class="bubble">
+          Ada diskon baju, mampir dulu? 👀
+          <span class="bubble-time">09:35 ✓✓</span>
+        </div>
+      </div>
+      <div class="msg-row them">
+        <div class="bubble">
+          <span class="bubble-sender">Istri</span>
+          Hahaha ayo! Di lantai berapa? 😍
+          <span class="bubble-time">09:35</span>
+        </div>
+      </div>
+
+      <div class="msg-row them" id="typingRow">
+        <div class="typing"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="input-bar">
+      <div class="input-wrap">
+        <input type="text" placeholder="Pesan ke Istri..." id="msgIn">
+        <span style="font-size:17px;cursor:pointer">😊</span>
+      </div>
+      <button class="send-fab" onclick="sendMsg()">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+    <div class="screen-label">4 · Chat — Identitas Aktif</div>
+  </div>
+
+</div><!-- /phone -->
+<div class="nav-hint">Tap untuk navigasi</div>
+<div class="nav-dots" id="navDots">
+  <div class="nav-dot active" onclick="goScreen(0)"></div>
+  <div class="nav-dot" onclick="goScreen(1)"></div>
+  <div class="nav-dot" onclick="goScreen(2)"></div>
+  <div class="nav-dot" onclick="goScreen(3)"></div>
+</div>
+</div>
+
+<script>
+const SCREENS=['splash','register','login','main'];
+let cur=0, pin='', connected=true;
+const avatarColors=['#3B7BFF','#0ECFB0','#FF6B35','#8B5CF6','#22D97A','#FFB347','#FF4D6A'];
+const replies=['Ok sayang! 😊','Siap, otw!','Hehe oke 🥰','Yuk cepetan~','Di mana? Aku nyusul','Beneran? 😂','Iya iya 🙏'];
+
+function goScreen(n){
+  document.getElementById(SCREENS[cur]).classList.remove('active');
+  const next=document.getElementById(SCREENS[n]);
+  next.classList.remove('back');
+  if(n<cur)next.classList.add('back');
+  next.classList.add('active');
+  cur=n;
+  document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===n));
+  if(n===3)setTimeout(()=>{const m=document.getElementById('msgs');m.scrollTop=m.scrollHeight;},50);
+}
+
+function updatePreview(){
+  const n=document.getElementById('regName').value.trim();
+  const av=document.getElementById('avPreview');
+  av.textContent=n?n[0].toUpperCase():'?';
+  const c=avatarColors[Math.abs(n.split('').reduce((a,c)=>a+c.charCodeAt(0),0))%avatarColors.length];
+  av.style.background=c;
+}
+
+function goLogin(){
+  const n=document.getElementById('regName').value.trim()||'Han';
+  document.getElementById('loginName').textContent='Halo, '+n+'! 👋';
+  document.getElementById('loginAv').textContent=n[0].toUpperCase();
+  const c=avatarColors[Math.abs(n.split('').reduce((a,ch)=>a+ch.charCodeAt(0),0))%avatarColors.length];
+  document.getElementById('loginAv').style.background=c;
+  document.getElementById('mainAv').textContent=n[0].toUpperCase();
+  document.getElementById('mainAv').style.background=c;
+  document.getElementById('mainName').textContent=n;
+  goScreen(2);
+}
+
+// PIN
+function pinPress(d){
+  if(pin.length>=4)return;
+  pin+=d;
+  updatePinDots();
+  if(pin.length===4)setTimeout(pinOk,300);
+}
+function pinDel(){if(pin.length>0){pin=pin.slice(0,-1);updatePinDots();}}
+function pinOk(){
+  if(pin.length<4){shakeDots();return;}
+  goScreen(3);pin='';updatePinDots();
+}
+function updatePinDots(){
+  for(let i=0;i<4;i++)document.getElementById('d'+i).classList.toggle('filled',i<pin.length);
+}
+function shakeDots(){
+  const pd=document.getElementById('pinDots');
+  pd.style.animation='none';pd.offsetHeight;
+  pd.style.animation='shake .3s ease';
+}
+
+// Chat
+function sendMsg(){
+  const inp=document.getElementById('msgIn');
+  const t=inp.value.trim();if(!t)return;
+  if(!connected){alert('Belum terhubung!');return;}
+  addMsg(t,true);inp.value='';
+  const tr=document.getElementById('typingRow');
+  if(tr)tr.remove();
+  setTimeout(()=>{
+    addMsg(replies[Math.floor(Math.random()*replies.length)],false,'Istri');
+    const msgs=document.getElementById('msgs');
+    const tw=document.createElement('div');
+    tw.id='typingRow';tw.className='msg-row them';
+    tw.innerHTML='<div class="typing"><span></span><span></span><span></span></div>';
+    msgs.appendChild(tw);msgs.scrollTop=msgs.scrollHeight;
+  },1400);
+}
+function addMsg(t,mine,sender){
+  const msgs=document.getElementById('msgs');
+  const tr=document.getElementById('typingRow');if(tr)tr.remove();
+  const row=document.createElement('div');
+  row.className='msg-row '+(mine?'me':'them');
+  const now=new Date();
+  const tm=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  row.innerHTML='<div class="bubble">'+((!mine&&sender)?'<span class="bubble-sender">'+sender+'</span>':'')+t+'<span class="bubble-time">'+tm+(mine?' ✓✓':'')+'</span></div>';
+  msgs.appendChild(row);msgs.scrollTop=msgs.scrollHeight;
+}
+
+function toggleConnect(){
+  connected=!connected;
+  const btn=document.querySelector('.act-btn.connect');
+  const dot=document.getElementById('btDot');
+  const lbl=document.getElementById('btLabel');
+  if(connected){btn.textContent='✕ Putuskan';btn.style.background='var(--blue)';dot.classList.add('on');dot.classList.remove('off');lbl.textContent='🟢 Terhubung: HP Istri';}
+  else{btn.textContent='🔗 Hubungkan';btn.style.background='var(--s3)';btn.style.color='var(--dim)';dot.classList.remove('on');dot.classList.add('off');lbl.textContent='🔴 Tidak terhubung';}
+}
+
+let popupOpen=false;
+function togglePopup(){popupOpen=!popupOpen;document.getElementById('profilePopup').classList.toggle('show',popupOpen);}
+function hidePopup(){popupOpen=false;document.getElementById('profilePopup').classList.remove('show');}
+function doLogout(){hidePopup();goScreen(0);}
+
+document.addEventListener('click',e=>{
+  if(popupOpen&&!e.target.closest('#profilePopup')&&!e.target.closest('.self-av'))hidePopup();
+});
+document.getElementById('msgIn').addEventListener('keydown',e=>{if(e.key==='Enter')sendMsg();});
+
+// Auto advance splash
+setTimeout(()=>{if(cur===0)goScreen(1);},2200);
+setTimeout(()=>{const m=document.getElementById('msgs');if(m)m.scrollTop=m.scrollHeight;},100);
+</script>
+</body>
+</html>

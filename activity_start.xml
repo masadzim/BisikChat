@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#080B12">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:padding="12dp" android:background="#0E1220">
+        <Button android:id="@+id/btnBack"
+            android:layout_width="36dp" android:layout_height="36dp"
+            android:text="←" android:textSize="18sp" android:padding="0dp"
+            android:backgroundTint="#1C2235"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Mulai Percakapan"
+            android:textColor="#E4EAF8" android:textSize="17sp"
+            android:textStyle="bold" android:layout_marginStart="12dp"/>
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:background="#0E1830" android:padding="16dp" android:layout_margin="16dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🔵 Terhubung ke: " android:textColor="#6B7799" android:textSize="13sp"/>
+        <TextView android:id="@+id/tvPeerName"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Perangkat" android:textColor="#3B7BFF"
+            android:textSize="14sp" android:textStyle="bold"/>
+    </LinearLayout>
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:padding="16dp">
+
+            <LinearLayout android:id="@+id/optChat"
+                android:layout_width="match_parent" android:layout_height="70dp"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:background="@drawable/option_bg" android:padding="16dp"
+                android:layout_marginBottom="10dp">
+                <TextView android:layout_width="44dp" android:layout_height="44dp"
+                    android:text="💬" android:textSize="22sp" android:gravity="center"
+                    android:background="@drawable/opt_icon_blue"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Chat Biasa" android:textColor="#E4EAF8"
+                        android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Kirim pesan teks langsung" android:textColor="#6B7799" android:textSize="12sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="›" android:textColor="#3B7BFF" android:textSize="22sp"/>
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/optCall"
+                android:layout_width="match_parent" android:layout_height="70dp"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:background="@drawable/option_bg" android:padding="16dp"
+                android:layout_marginBottom="10dp">
+                <TextView android:layout_width="44dp" android:layout_height="44dp"
+                    android:text="📞" android:textSize="22sp" android:gravity="center"
+                    android:background="@drawable/opt_icon_teal"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Panggilan Suara" android:textColor="#E4EAF8"
+                        android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Telepon langsung tanpa internet" android:textColor="#6B7799" android:textSize="12sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="›" android:textColor="#0ECFB0" android:textSize="22sp"/>
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/optGroup"
+                android:layout_width="match_parent" android:layout_height="70dp"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:background="@drawable/option_bg" android:padding="16dp"
+                android:layout_marginBottom="10dp">
+                <TextView android:layout_width="44dp" android:layout_height="44dp"
+                    android:text="👥" android:textSize="22sp" android:gravity="center"
+                    android:background="@drawable/opt_icon_amber"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Group Chat" android:textColor="#E4EAF8"
+                        android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Chat bersama beberapa orang" android:textColor="#6B7799" android:textSize="12sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="›" android:textColor="#FFB347" android:textSize="22sp"/>
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/optGroupCall"
+                android:layout_width="match_parent" android:layout_height="70dp"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:background="@drawable/option_bg" android:padding="16dp">
+                <TextView android:layout_width="44dp" android:layout_height="44dp"
+                    android:text="📻" android:textSize="22sp" android:gravity="center"
+                    android:background="@drawable/opt_icon_red"/>
+                <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="14dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Group Call / Live Call" android:textColor="#E4EAF8"
+                        android:textSize="15sp" android:textStyle="bold"/>
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Panggilan suara semua anggota" android:textColor="#6B7799" android:textSize="12sp"/>
+                </LinearLayout>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="›" android:textColor="#FF4D6A" android:textSize="22sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

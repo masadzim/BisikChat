@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center"
+    android:background="#080B12">
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="🔵" android:textSize="56sp" android:gravity="center"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="BisikChat" android:textColor="#FFFFFF" android:textSize="32sp"
+        android:textStyle="bold" android:layout_marginTop="12dp" android:fontFamily="sans-serif-medium"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Chat Bluetooth · Tanpa Internet" android:textColor="#6B7799"
+        android:textSize="14sp" android:layout_marginTop="6dp"/>
+
+    <ProgressBar android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="48dp" android:indeterminateTint="#3B7BFF"/>
+</LinearLayout>

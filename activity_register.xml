@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#080B12" android:fillViewport="true">
+
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="28dp">
+
+        <!-- Avatar Preview -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:gravity="center" android:layout_marginBottom="24dp" android:layout_marginTop="12dp">
+            <TextView android:id="@+id/tvAvatarPreview"
+                android:layout_width="80dp" android:layout_height="80dp"
+                android:gravity="center" android:text="?"
+                android:textColor="#FFFFFF" android:textSize="32sp" android:textStyle="bold"
+                android:background="@drawable/avatar_bg"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Buat Profil Lokal" android:textColor="#E4EAF8"
+            android:textSize="24sp" android:textStyle="bold" android:layout_marginBottom="6dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Data tersimpan di device ini saja. Tidak ada cloud." android:textColor="#6B7799"
+            android:textSize="13sp" android:layout_marginBottom="28dp"/>
+
+        <!-- Name -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Nama Tampilan" android:textColor="#AAB4C8" android:textSize="12sp"
+            android:layout_marginBottom="6dp" android:textAllCaps="true"/>
+        <EditText android:id="@+id/etName"
+            android:layout_width="match_parent" android:layout_height="52dp"
+            android:hint="Nama kamu..." 
+            android:textColor="#E4EAF8" android:background="@drawable/input_bg"
+            android:padding="14dp" android:inputType="textPersonName"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- PIN -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="PIN (4-6 digit)" android:textColor="#AAB4C8" android:textSize="12sp"
+            android:layout_marginBottom="6dp" android:textAllCaps="true"/>
+        <EditText android:id="@+id/etPin"
+            android:layout_width="match_parent" android:layout_height="52dp"
+            android:hint="Buat PIN rahasia..." 
+            android:textColor="#E4EAF8" android:background="@drawable/input_bg"
+            android:padding="14dp" android:inputType="numberPassword"
+            android:maxLength="6" android:layout_marginBottom="10dp"/>
+        <EditText android:id="@+id/etPinConfirm"
+            android:layout_width="match_parent" android:layout_height="52dp"
+            android:hint="Ulangi PIN..." 
+            android:textColor="#E4EAF8" android:background="@drawable/input_bg"
+            android:padding="14dp" android:inputType="numberPassword"
+            android:maxLength="6" android:layout_marginBottom="16dp"/>
+
+        <!-- Status -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Status (opsional)" android:textColor="#AAB4C8" android:textSize="12sp"
+            android:layout_marginBottom="6dp" android:textAllCaps="true"/>
+        <EditText android:id="@+id/etStatus"
+            android:layout_width="match_parent" android:layout_height="52dp"
+            android:hint="Tersedia / Sibuk / DND..." 
+            android:textColor="#E4EAF8" android:background="@drawable/input_bg"
+            android:padding="14dp" android:layout_marginBottom="16dp"/>
+
+        <!-- Device alias -->
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Nama Device (terlihat orang lain)" android:textColor="#AAB4C8" android:textSize="12sp"
+            android:layout_marginBottom="6dp" android:textAllCaps="true"/>
+        <EditText android:id="@+id/etDevice"
+            android:layout_width="match_parent" android:layout_height="52dp"
+            android:hint="Contoh: HP Abang" 
+            android:textColor="#E4EAF8" android:background="@drawable/input_bg"
+            android:padding="14dp" android:layout_marginBottom="28dp"/>
+
+        <Button android:id="@+id/btnRegister"
+            android:layout_width="match_parent" android:layout_height="54dp"
+            android:text="Buat Profil &amp; Masuk" android:textSize="15sp"
+            android:textStyle="bold" android:backgroundTint="#3B7BFF"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="🔒 Profil disimpan lokal · Tidak ada akun online · Tidak ada tracking"
+            android:textColor="#444D65" android:textSize="11sp" android:gravity="center"
+            android:lineSpacingMultiplier="1.4"/>
+    </LinearLayout>
+</ScrollView>

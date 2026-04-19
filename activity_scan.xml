@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#080B12">
+
+    <!-- Header -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:padding="12dp" android:background="#0E1220">
+        <Button android:id="@+id/btnBack"
+            android:layout_width="36dp" android:layout_height="36dp"
+            android:text="←" android:textSize="18sp" android:padding="0dp"
+            android:backgroundTint="#1C2235"/>
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Scan Perangkat"
+            android:textColor="#E4EAF8" android:textSize="17sp"
+            android:textStyle="bold" android:layout_marginStart="12dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="📡" android:textSize="20sp"/>
+    </LinearLayout>
+
+    <!-- Radar animation area -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="180dp"
+        android:gravity="center" android:background="#0A0D18">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🔵" android:textSize="56sp"/>
+    </LinearLayout>
+
+    <!-- Status -->
+    <TextView android:id="@+id/tvScanStatus"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="Mencari perangkat..." android:textColor="#6B7799"
+        android:textSize="13sp" android:padding="16dp" android:gravity="center"/>
+
+    <!-- Device list -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvDevices"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:padding="12dp"/>
+
+    <!-- Scan button -->
+    <Button android:id="@+id/btnScan"
+        android:layout_width="match_parent" android:layout_height="52dp"
+        android:text="🔄 Refresh Perangkat" android:textSize="14sp"
+        android:backgroundTint="#3B7BFF" android:layout_margin="16dp"/>
+</LinearLayout>

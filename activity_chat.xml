@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#080B12">
+
+    <!-- Chat header with call button -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="60dp"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:padding="10dp" android:background="#0E1220">
+
+        <Button android:id="@+id/btnBack"
+            android:layout_width="36dp" android:layout_height="36dp"
+            android:text="←" android:textSize="18sp" android:padding="0dp"
+            android:backgroundTint="#1C2235"/>
+
+        <TextView android:id="@+id/tvPeerAvatar"
+            android:layout_width="38dp" android:layout_height="38dp"
+            android:gravity="center" android:text="?" android:textColor="#FFFFFF"
+            android:textSize="15sp" android:textStyle="bold"
+            android:background="@drawable/avatar_bg" android:layout_marginStart="8dp"/>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:orientation="vertical"
+            android:layout_marginStart="10dp">
+            <TextView android:id="@+id/tvPeerName"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="Nama" android:textColor="#E4EAF8"
+                android:textSize="15sp" android:textStyle="bold"/>
+            <TextView android:id="@+id/tvStatus"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="● Online via Bluetooth"
+                android:textColor="#0ECFB0" android:textSize="11sp"/>
+        </LinearLayout>
+
+        <!-- Call button -->
+        <TextView android:id="@+id/tvCallBtn"
+            android:layout_width="38dp" android:layout_height="38dp"
+            android:gravity="center" android:text="📞" android:textSize="18sp"
+            android:background="@drawable/call_btn_bg" android:layout_marginEnd="6dp"/>
+
+        <TextView android:layout_width="38dp" android:layout_height="38dp"
+            android:gravity="center" android:text="⋮" android:textSize="20sp"
+            android:textColor="#6B7799"/>
+    </LinearLayout>
+
+    <!-- Messages -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:padding="8dp" android:clipToPadding="false"/>
+
+    <!-- Input -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="#0E1220" android:padding="10dp"
+        android:orientation="horizontal" android:gravity="center_vertical">
+        <TextView android:layout_width="34dp" android:layout_height="34dp"
+            android:gravity="center" android:text="📎" android:textSize="18sp"
+            android:background="@drawable/input_bg" android:layout_marginEnd="6dp"/>
+        <EditText android:id="@+id/etMessage"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:hint="Pesan..."
+             android:textColor="#E4EAF8"
+            android:background="@drawable/input_bg" android:padding="10dp"
+            android:maxLines="4" android:layout_marginEnd="6dp"/>
+        <Button android:id="@+id/btnSend"
+            android:layout_width="44dp" android:layout_height="44dp"
+            android:text="➤" android:textSize="16sp" android:padding="0dp"
+            android:backgroundTint="#3B7BFF"/>
+    </LinearLayout>
+</LinearLayout>

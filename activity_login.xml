@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:gravity="center"
+    android:background="#080B12" android:padding="28dp">
+
+    <!-- Avatar -->
+    <TextView android:id="@+id/tvAvatar"
+        android:layout_width="88dp" android:layout_height="88dp"
+        android:gravity="center" android:text="?" android:textColor="#FFFFFF"
+        android:textSize="34sp" android:textStyle="bold"
+        android:background="@drawable/avatar_bg" android:layout_marginBottom="16dp"/>
+
+    <TextView android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Selamat datang!" android:textColor="#E4EAF8"
+        android:textSize="22sp" android:textStyle="bold" android:layout_marginBottom="6dp"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Masukkan PIN untuk masuk" android:textColor="#6B7799"
+        android:textSize="14sp" android:layout_marginBottom="32dp"/>
+
+    <!-- PIN dots display -->
+    <EditText android:id="@+id/etPin"
+        android:layout_width="180dp" android:layout_height="52dp"
+        android:gravity="center" android:text="○ ○ ○ ○"
+        android:textColor="#3B7BFF" android:textSize="22sp"
+        android:background="@drawable/input_bg"
+        android:focusable="false" android:cursorVisible="false"
+        android:layout_marginBottom="28dp"/>
+
+    <!-- Numpad -->
+    <GridLayout android:layout_width="260dp" android:layout_height="wrap_content"
+        android:columnCount="3" android:rowCount="4" android:layout_marginBottom="20dp">
+
+        <Button android:id="@+id/btn1" style="@style/NumBtn" android:text="1"/>
+        <Button android:id="@+id/btn2" style="@style/NumBtn" android:text="2"/>
+        <Button android:id="@+id/btn3" style="@style/NumBtn" android:text="3"/>
+        <Button android:id="@+id/btn4" style="@style/NumBtn" android:text="4"/>
+        <Button android:id="@+id/btn5" style="@style/NumBtn" android:text="5"/>
+        <Button android:id="@+id/btn6" style="@style/NumBtn" android:text="6"/>
+        <Button android:id="@+id/btn7" style="@style/NumBtn" android:text="7"/>
+        <Button android:id="@+id/btn8" style="@style/NumBtn" android:text="8"/>
+        <Button android:id="@+id/btn9" style="@style/NumBtn" android:text="9"/>
+        <Button android:id="@+id/btnDel" style="@style/NumBtn" android:text="⌫" android:backgroundTint="#1C2235"/>
+        <Button android:id="@+id/btn0" style="@style/NumBtn" android:text="0"/>
+        <Button android:id="@+id/btnLogin" style="@style/NumBtn" android:text="✓" android:backgroundTint="#3B7BFF"/>
+    </GridLayout>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="🔒 Verifikasi lokal · Tidak terhubung internet"
+        android:textColor="#444D65" android:textSize="11sp"/>
+</LinearLayout>

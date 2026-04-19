@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="#060C1C"
+    android:gravity="center_horizontal">
+
+    <!-- Back -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="56dp"
+        android:orientation="horizontal" android:gravity="center_vertical" android:padding="12dp">
+        <Button android:id="@+id/btnBack"
+            android:layout_width="36dp" android:layout_height="36dp"
+            android:text="←" android:textSize="18sp" android:padding="0dp"
+            android:backgroundTint="#1C2235"/>
+        <TextView android:id="@+id/tvScreenTitle"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Panggilan Suara"
+            android:textColor="#E4EAF8" android:textSize="16sp"
+            android:textStyle="bold" android:gravity="center"/>
+        <View android:layout_width="36dp" android:layout_height="36dp"/>
+    </LinearLayout>
+
+    <!-- Call body -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:orientation="vertical"
+        android:gravity="center" android:padding="24dp">
+
+        <!-- Single call avatar -->
+        <TextView android:id="@+id/tvAvatar"
+            android:layout_width="96dp" android:layout_height="96dp"
+            android:gravity="center" android:text="?" android:textColor="#FFFFFF"
+            android:textSize="38sp" android:textStyle="bold"
+            android:background="@drawable/call_avatar_bg"
+            android:layout_marginBottom="18dp"/>
+
+        <!-- Group participants -->
+        <LinearLayout android:id="@+id/llGroupParticipants"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:gravity="center"
+            android:visibility="gone" android:layout_marginBottom="18dp"/>
+
+        <TextView android:id="@+id/tvPeerName"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Nama" android:textColor="#E4EAF8"
+            android:textSize="26sp" android:textStyle="bold"
+            android:layout_marginBottom="6dp"/>
+
+        <TextView android:id="@+id/tvStatus"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Menyambungkan..." android:textColor="#0ECFB0"
+            android:textSize="14sp" android:layout_marginBottom="10dp"/>
+
+        <TextView android:id="@+id/tvTimer"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="00:00" android:textColor="#E4EAF8"
+            android:textSize="22sp" 
+            android:textStyle="bold" android:layout_marginBottom="28dp"/>
+
+        <!-- Wave visualizer (decorative) -->
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="36dp"
+            android:orientation="horizontal" android:gravity="center_vertical" >
+            <View android:layout_width="4dp" android:layout_height="10dp" android:background="#3B7BFF"/>
+            <View android:layout_width="4dp" android:layout_height="20dp" android:background="#5B96FF"/>
+            <View android:layout_width="4dp" android:layout_height="30dp" android:background="#3B7BFF"/>
+            <View android:layout_width="4dp" android:layout_height="22dp" android:background="#0ECFB0"/>
+            <View android:layout_width="4dp" android:layout_height="32dp" android:background="#3B7BFF"/>
+            <View android:layout_width="4dp" android:layout_height="16dp" android:background="#5B96FF"/>
+            <View android:layout_width="4dp" android:layout_height="28dp" android:background="#3B7BFF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Call control buttons -->
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center"
+        android:padding="24dp" >
+
+        <Button android:id="@+id/btnMute"
+            android:layout_width="0dp" android:layout_height="56dp" android:layout_weight="1"
+            android:text="🎙️ Bisukan" android:textSize="12sp"
+            android:backgroundTint="#1C2235"/>
+
+        <Button android:id="@+id/btnEnd"
+            android:layout_width="70dp" android:layout_height="70dp"
+            android:text="📵" android:textSize="26sp" android:padding="0dp"
+            android:backgroundTint="#FF4D6A"/>
+
+        <Button android:id="@+id/btnSpeaker"
+            android:layout_width="0dp" android:layout_height="56dp" android:layout_weight="1"
+            android:text="🔊 Speaker" android:textSize="12sp"
+            android:backgroundTint="#1C2235"/>
+    </LinearLayout>
+
+    <View android:layout_width="match_parent" android:layout_height="20dp"/>
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">#3B7BFF</item>
+        <item name="colorPrimaryVariant">#2455CC</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="android:windowBackground">#080B12</item>
+        <item name="android:statusBarColor">#161926</item>
+        <item name="android:navigationBarColor">#0D0F18</item>
+    </style>
+
+    <style name="NumBtn" parent="Widget.MaterialComponents.Button">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#E4EAF8</item>
+        <item name="backgroundTint">#1C2235</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+</resources>
